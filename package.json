@@ -10,5 +10,6 @@
   "sapux": [
     "app/cap_xsuaa_rbac_authors",
     "app/cap_xsuaa_rbac_books"
-  ]
+  ],
+  "dependencies": {}
 }
