@@ -26,9 +26,10 @@ hs_err*
 *.tgz
 *.iml
 
-.vscode
+# .vscode
 .idea
 .reloadtrigger
 
 # added by cds
 .cdsrc-private.json
+app/router/default-services.json

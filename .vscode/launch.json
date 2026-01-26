@@ -1,0 +1,49 @@
+{
+    "configurations": [
+        {
+            "command": "npx cds bind --exec mvn spring-boot:run",
+            "name": "cds bind hybrid",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Application<cap_xsuaa_rbac>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "customer.cap_xsuaa_rbac.Application",
+            "projectName": "cap_xsuaa_rbac",
+            "preLaunchTask": "cds_bind"
+        },
+        {
+            "name": "Launch Approuter",
+            "program": "${workspaceFolder}/app/router/node_modules/@sap/approuter/approuter.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node",
+            "localRoot": "${workspaceFolder}/app/router",
+            "env": {
+                "CF_NODEJS_LOGGING_LEVEL": "debug",
+                "XS_APP_LOG_LEVEL": "debug",
+                "destinations": "[{\"name\":\"srv-api\",\"url\":\"http://localhost:8080\",\"forwardAuthToken\":true,\"strictSSL\":false}]"
+            }
+        },
+    ],
+    "compounds": [
+        {
+            "name": "Start Full App (Spring Boot + Approuter)",
+            "configurations": [
+                "Spring Boot-Application<cap_xsuaa_rbac>",
+                "Launch Approuter"
+            ],
+            "stopAll": true,
+            "presentation": {
+                "hidden": false,
+                "group": "Full Stack",
+                "order": 1
+            }
+        }
+    ]
+}
