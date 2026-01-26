@@ -101,6 +101,21 @@ annotate service.Books with @(
 );
 
 annotate service.Books with {
-    author @Common.ExternalID : author.name
+    author @(
+        Common.ExternalID : author.name,
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Authors',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : author_ID,
+                    ValueListProperty : 'ID',
+                },
+            ],
+            Label : 'Select an Author',
+        },
+        Common.ValueListWithFixedValues : false,
+    )
 };
 
