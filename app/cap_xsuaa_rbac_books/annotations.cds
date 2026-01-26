@@ -13,6 +13,11 @@ annotate service.Books with @(
         },
         {
             $Type : 'UI.DataField',
+            Value : country,
+            Label : 'country',
+        },
+        {
+            $Type : 'UI.DataField',
             Value : price,
             Label : 'price',
         },
@@ -64,6 +69,11 @@ annotate service.Books with @(
                 $Type : 'UI.DataField',
                 Value : author_ID,
                 Label : 'author_ID',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : country,
+                Label : 'country',
             },
             {
                 $Type : 'UI.DataField',

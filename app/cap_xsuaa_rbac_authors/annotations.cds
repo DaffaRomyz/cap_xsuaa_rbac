@@ -8,6 +8,11 @@ annotate service.Authors with @(
         },
         {
             $Type : 'UI.DataField',
+            Value : country,
+            Label : 'country',
+        },
+        {
+            $Type : 'UI.DataField',
             Value : is_active,
             Label : 'is_active',
         },
@@ -59,6 +64,11 @@ annotate service.Authors with @(
                 $Type : 'UI.DataField',
                 Value : name,
                 Label : 'name',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : country,
+                Label : 'country',
             },
             {
                 $Type : 'UI.DataField',
