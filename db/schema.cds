@@ -5,6 +5,7 @@ using { cuid, managed } from '@sap/cds/common';
 entity Books : cuid, managed { 
   title  : String(111);
   author : Association to Authors;
+  country : String(3);
   stock  : Integer;
   price  : Decimal(9,2);
 }
