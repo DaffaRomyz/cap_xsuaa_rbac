@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import com.sap.cds.ql.Update;
 import com.sap.cds.ql.cqn.CqnSelect;
 import com.sap.cds.ql.cqn.CqnUpdate;
+import com.sap.cds.services.ErrorStatuses;
+import com.sap.cds.services.ServiceException;
 import com.sap.cds.services.handler.EventHandler;
 import com.sap.cds.services.handler.annotations.On;
 import com.sap.cds.services.handler.annotations.ServiceName;
@@ -26,6 +28,9 @@ public class CatalogServiceAuthorsHandler implements EventHandler {
 
     @On(event = AuthorsSetEnableContext.CDS_NAME, entity = Authors_.CDS_NAME)
     public void setEnable(AuthorsSetEnableContext context) {
+        if (!context.getUserInfo().hasRole("ManagerRole")) {
+            throw new ServiceException(ErrorStatuses.FORBIDDEN, "Require Manager Access");
+        }
         CqnSelect select = context.getCqn();
         Authors authors = db.run(select).single(Authors.class);
 
@@ -41,6 +46,9 @@ public class CatalogServiceAuthorsHandler implements EventHandler {
 
     @On(event = AuthorsSetDisableContext.CDS_NAME, entity = Authors_.CDS_NAME)
     public void setDisable(AuthorsSetDisableContext context) {
+        if (!context.getUserInfo().hasRole("ManagerRole")) {
+            throw new ServiceException(ErrorStatuses.FORBIDDEN, "Require Manager Access");
+        }
         CqnSelect select = context.getCqn();
         Authors authors = db.run(select).single(Authors.class);
 
