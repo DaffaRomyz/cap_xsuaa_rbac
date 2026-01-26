@@ -1,7 +1,97 @@
 {
-  "scopes": [],
-  "attributes": [],
-  "role-templates": [],
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.DisplayBooks",
+      "description": "scope for display books"
+    },
+    {
+      "name": "$XSAPPNAME.WriteBooks",
+      "description": "scope for write books"
+    },
+    {
+      "name": "$XSAPPNAME.WriteAuthors",
+      "description": "scope for write authors"
+    },
+    {
+      "name": "$XSAPPNAME.EnableAuthors",
+      "description": "scope for enable/disable authors"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "Country",
+      "description": "Contains author information of assigned user",
+      "valueType": "string",
+      "valueRequired": "false"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "ReaderRole",
+      "description": "Role for readers, allows to view list of books",
+      "scope-references": [
+        "$XSAPPNAME.DisplayBooks"
+      ]
+    },
+    {
+      "name": "AuthorRole",
+      "description": "Role for authors, allows to maintain own books and own authors data",
+      "scope-references": [
+        "$XSAPPNAME.DisplayBooks",
+        "$XSAPPNAME.WriteBooks",
+        "$XSAPPNAME.WriteAuthors"
+      ]
+    },
+    {
+      "name": "AuditorRole",
+      "description": "Role for auditors, allows to maintain books and authors according to country",
+      "scope-references": [
+        "$XSAPPNAME.DisplayBooks",
+        "$XSAPPNAME.WriteBooks",
+        "$XSAPPNAME.WriteAuthors"
+      ],
+      "attribute-references": [
+        {
+          "name": "Country"
+        }
+      ]
+    },
+    {
+      "name": "ManagerRole",
+      "description": "Role for managers, allows to manage all data.",
+      "scope-references": [
+        "$XSAPPNAME.DisplayBooks",
+        "$XSAPPNAME.WriteBooks",
+        "$XSAPPNAME.WriteAuthors",
+        "$XSAPPNAME.EnableAuthors"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "ReaderRoles",
+      "role-template-references": [
+        "$XSAPPNAME.ReaderRole"
+      ]
+    },
+    {
+      "name": "AuthorRoles",
+      "role-template-references": [
+        "$XSAPPNAME.AuthorRole"
+      ]
+    },{
+      "name": "AuditorRoles",
+      "role-template-references": [
+        "$XSAPPNAME.AuditorRole"
+      ]
+    },
+    {
+      "name": "ManagerRoles",
+      "role-template-references": [
+        "$XSAPPNAME.ManagerRole"
+      ]
+    }
+  ],
   "xsappname": "cap_xsuaa_rbac",
   "tenant-mode": "dedicated",
   "oauth2-configuration": {

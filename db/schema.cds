@@ -11,6 +11,7 @@ entity Books : cuid, managed {
 
 entity Authors : cuid, managed {
   name   : String(111);
+  country    : String(3);
   is_active : Boolean default true;
   books  : Association to many Books on books.author = $self;
 }
