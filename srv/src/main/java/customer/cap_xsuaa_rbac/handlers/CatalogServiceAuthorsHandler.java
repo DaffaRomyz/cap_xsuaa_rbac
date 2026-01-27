@@ -28,8 +28,8 @@ public class CatalogServiceAuthorsHandler implements EventHandler {
 
     @On(event = AuthorsSetEnableContext.CDS_NAME, entity = Authors_.CDS_NAME)
     public void setEnable(AuthorsSetEnableContext context) {
-        if (!context.getUserInfo().hasRole("ManagerRole")) {
-            throw new ServiceException(ErrorStatuses.FORBIDDEN, "Require Manager Access");
+        if (!context.getUserInfo().hasRole("EnableAuthors")) {
+            throw new ServiceException(ErrorStatuses.FORBIDDEN, "Not Authorized");
         }
         CqnSelect select = context.getCqn();
         Authors authors = db.run(select).single(Authors.class);
@@ -46,8 +46,8 @@ public class CatalogServiceAuthorsHandler implements EventHandler {
 
     @On(event = AuthorsSetDisableContext.CDS_NAME, entity = Authors_.CDS_NAME)
     public void setDisable(AuthorsSetDisableContext context) {
-        if (!context.getUserInfo().hasRole("ManagerRole")) {
-            throw new ServiceException(ErrorStatuses.FORBIDDEN, "Require Manager Access");
+        if (!context.getUserInfo().hasRole("EnableAuthors")) {
+            throw new ServiceException(ErrorStatuses.FORBIDDEN, "Not Authorized");
         }
         CqnSelect select = context.getCqn();
         Authors authors = db.run(select).single(Authors.class);
