@@ -1,0 +1,4 @@
+ID,name,country,is_active,createdAt,createdBy,modifiedAt,modifiedBy
+18319136-6c3d-4d1e-8ffd-3d4d216a3f8f,Andrea Hirata,IDN,true,2026-01-26T01:00:00.000Z,youremail@forBTP.com,2026-01-26T01:00:00.000Z,youremail@forBTP.com
+0eb89fd0-8b3d-4485-a36c-973a4de038d4,Tere Liye,IDN,true,2026-01-26T01:00:00.000Z,peopleIDN@example.com,2026-01-26T01:00:00.000Z,peopleIDN@example.com
+21539147-210a-41e2-ab13-acba8b6c4ed2,Edgar Allen Poe,USA,true,2026-01-26T01:00:00.000Z,peopleUSA@example.com,2026-01-26T01:00:00.000Z,peopleUSA@example.com
