@@ -1,6 +1,6 @@
 ID,title,author_ID,country,stock,price,createdAt,createdBy,modifiedAt,modifiedBy
-14371681-d26b-49d3-bfea-1306ca77576a,Laskar Pelangi,18319136-6c3d-4d1e-8ffd-3d4d216a3f8f,IDN,11,1000.00,2026-01-26T01:00:00.000Z,daffa.romyz@hand-global.com,2026-01-26T01:00:00.000Z,daffa.romyz@hand-global.com
-021261fc-d816-4806-935b-a8f54c9d0056,Sang Pemimpi,18319136-6c3d-4d1e-8ffd-3d4d216a3f8f,IDN,12,2000.00,2026-01-26T01:00:00.000Z,daffa.romyz@hand-global.com,2026-01-26T01:00:00.000Z,daffa.romyz@hand-global.com
+14371681-d26b-49d3-bfea-1306ca77576a,Laskar Pelangi,18319136-6c3d-4d1e-8ffd-3d4d216a3f8f,IDN,11,1000.00,2026-01-26T01:00:00.000Z,youremail@forBTP.com,2026-01-26T01:00:00.000Z,youremail@forBTP.com
+021261fc-d816-4806-935b-a8f54c9d0056,Sang Pemimpi,18319136-6c3d-4d1e-8ffd-3d4d216a3f8f,IDN,12,2000.00,2026-01-26T01:00:00.000Z,youremail@forBTP.com,2026-01-26T01:00:00.000Z,youremail@forBTP.com
 e1bd6c3b-416b-48fe-96c7-ac94a4ca600f,Tentang Kamu,0eb89fd0-8b3d-4485-a36c-973a4de038d4,IDN,13,3000.00,2026-01-26T01:00:00.000Z,peopleIDN@example.com,2026-01-26T01:00:00.000Z,peopleIDN@example.com
 150e830c-feb0-4720-a839-0f2e63760f41,Pulang,0eb89fd0-8b3d-4485-a36c-973a4de038d4,IDN,14,4000.00,2026-01-26T01:00:00.000Z,peopleIDN@example.com,2026-01-26T01:00:00.000Z,peopleIDN@example.com
 17863696-592e-459d-a91e-53ef0f71c778,The Raven,21539147-210a-41e2-ab13-acba8b6c4ed2,USA,15,5000.00,2026-01-26T01:00:00.000Z,peopleUSA@example.com,2026-01-26T01:00:00.000Z,peopleUSA@example.com
