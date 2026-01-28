@@ -1,8 +1,8 @@
 {
   "scopes": [
     {
-      "name": "$XSAPPNAME.DisplayBooks",
-      "description": "scope for display books"
+      "name": "$XSAPPNAME.ReadBooks",
+      "description": "scope for read books"
     },
     {
       "name": "$XSAPPNAME.WriteBooksOwn",
@@ -17,16 +17,20 @@
       "description": "scope for write all books"
     },
     {
-      "name": "$XSAPPNAME.MaintainAuthorsOwn",
-      "description": "scope for read and write own authors"
+      "name": "$XSAPPNAME.ReadAuthors",
+      "description": "scope for read authors"
     },
     {
-      "name": "$XSAPPNAME.MaintainAuthorsCountry",
-      "description": "scope for read write authors with same country"
+      "name": "$XSAPPNAME.WriteAuthorsOwn",
+      "description": "scope for write own authors"
     },
     {
-      "name": "$XSAPPNAME.MaintainAuthorsAll",
-      "description": "scope for read and write all authors"
+      "name": "$XSAPPNAME.WriteAuthorsCountry",
+      "description": "scope for write authors with same country"
+    },
+    {
+      "name": "$XSAPPNAME.WriteAuthorsAll",
+      "description": "scope for write all authors"
     },
     {
       "name": "$XSAPPNAME.EnableAuthors",
@@ -44,27 +48,30 @@
   "role-templates": [
     {
       "name": "ReaderRole",
-      "description": "Role for readers, allows to view list of books",
+      "description": "Role for readers, allows to view list of books and authors",
       "scope-references": [
-        "$XSAPPNAME.DisplayBooks"
+        "$XSAPPNAME.ReadBooks",
+        "$XSAPPNAME.ReadAuthors"
       ]
     },
     {
       "name": "AuthorRole",
       "description": "Role for authors, allows to maintain own books and own authors data",
       "scope-references": [
-        "$XSAPPNAME.DisplayBooks",
+        "$XSAPPNAME.ReadBooks",
+        "$XSAPPNAME.ReadAuthors",
         "$XSAPPNAME.WriteBooksOwn",
-        "$XSAPPNAME.MaintainAuthorsOwn"
+        "$XSAPPNAME.WriteAuthorsOwn"
       ]
     },
     {
       "name": "AuditorRole",
       "description": "Role for auditors, allows to maintain books and authors according to country",
       "scope-references": [
-        "$XSAPPNAME.DisplayBooks",
+        "$XSAPPNAME.ReadBooks",
+        "$XSAPPNAME.ReadAuthors",
         "$XSAPPNAME.WriteBooksCountry",
-        "$XSAPPNAME.MaintainAuthorsCountry"
+        "$XSAPPNAME.WriteAuthorsCountry"
       ],
       "attribute-references": [
         {
@@ -76,9 +83,10 @@
       "name": "ManagerRole",
       "description": "Role for managers, allows to manage all data.",
       "scope-references": [
-        "$XSAPPNAME.DisplayBooks",
+        "$XSAPPNAME.ReadBooks",
+        "$XSAPPNAME.ReadAuthors",
         "$XSAPPNAME.WriteBooksAll",
-        "$XSAPPNAME.MaintainAuthorsAll",
+        "$XSAPPNAME.WriteAuthorsAll",
         "$XSAPPNAME.EnableAuthors"
       ]
     }
