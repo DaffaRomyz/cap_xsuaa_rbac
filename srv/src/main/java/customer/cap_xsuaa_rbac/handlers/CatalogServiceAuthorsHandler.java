@@ -78,7 +78,11 @@ public class CatalogServiceAuthorsHandler implements EventHandler {
         UserInfo userInfo = context.getUserInfo();
 
         configuration.setUsername(userInfo.getName());
-        configuration.setCountry(userInfo.getAttributeValues("Country").get(0));
+
+        if (!userInfo.getAttributeValues("Country").isEmpty()) {
+            configuration.setCountry(userInfo.getAttributeValues("Country").get(0));
+            
+        }
         configuration.setWriteBooksOwn(userInfo.hasRole("WriteBooksOwn"));
         configuration.setWriteBooksCountry(userInfo.hasRole("WriteBooksCountry"));
         configuration.setWriteBooksAll(userInfo.hasRole("WriteBooksAll"));
