@@ -1,102 +1,155 @@
 using CatalogService as service from '../../srv/catalog-service';
+
 annotate service.Authors with @(
-    UI.LineItem : [
+    UI.LineItem              : [
         {
-            $Type : 'UI.DataField',
-            Value : name,
-            Label : 'name',
+            $Type: 'UI.DataField',
+            Value: name,
+            Label: 'name',
         },
         {
-            $Type : 'UI.DataField',
-            Value : country,
-            Label : 'country',
+            $Type: 'UI.DataField',
+            Value: country,
+            Label: 'country',
         },
         {
-            $Type : 'UI.DataField',
-            Value : is_active,
-            Label : 'is_active',
+            $Type: 'UI.DataField',
+            Value: is_active,
+            Label: 'is_active',
         },
         {
-            $Type : 'UI.DataField',
-            Value : createdAt,
+            $Type: 'UI.DataField',
+            Value: createdAt,
         },
         {
-            $Type : 'UI.DataField',
-            Value : createdBy,
+            $Type: 'UI.DataField',
+            Value: createdBy,
         },
         {
-            $Type : 'UI.DataField',
-            Value : modifiedAt,
+            $Type: 'UI.DataField',
+            Value: modifiedAt,
         },
         {
-            $Type : 'UI.DataField',
-            Value : modifiedBy,
+            $Type: 'UI.DataField',
+            Value: modifiedBy,
         },
         {
-            $Type : 'UI.DataFieldForAction',
-            Action : 'CatalogService.setEnable',
-            Label : 'setEnable',
+            $Type     : 'UI.DataFieldForAction',
+            Action    : 'CatalogService.setEnable',
+            Label     : 'setEnable',
+            @UI.Hidden: {$edmJson: {$Not: {$Eq: [
+                {$Path: '/CatalogService.EntityContainer/Configuration/enableAuthors'},
+                true
+            ]}}},
         },
         {
-            $Type : 'UI.DataFieldForAction',
-            Action : 'CatalogService.setDisable',
-            Label : 'setDisable',
+            $Type     : 'UI.DataFieldForAction',
+            Action    : 'CatalogService.setDisable',
+            Label     : 'setDisable',
+            @UI.Hidden: {$edmJson: {$Not: {$Eq: [
+                {$Path: '/CatalogService.EntityContainer/Configuration/enableAuthors'},
+                true
+            ]}}},
         },
     ],
-    UI.Facets : [
+    UI.Facets                : [
         {
             $Type : 'UI.ReferenceFacet',
             Label : 'General',
-            ID : 'General',
-            Target : '@UI.FieldGroup#General',
+            ID    : 'General',
+            Target: '@UI.FieldGroup#General',
         },
         {
             $Type : 'UI.ReferenceFacet',
             Label : 'Change Data',
-            ID : 'ChangeData',
-            Target : '@UI.FieldGroup#ChangeData',
+            ID    : 'ChangeData',
+            Target: '@UI.FieldGroup#ChangeData',
         },
     ],
-    UI.FieldGroup #General : {
-        $Type : 'UI.FieldGroupType',
+    UI.FieldGroup #General   : {
+        $Type: 'UI.FieldGroupType',
         Data : [
             {
-                $Type : 'UI.DataField',
-                Value : name,
-                Label : 'name',
+                $Type: 'UI.DataField',
+                Value: name,
+                Label: 'name',
             },
             {
-                $Type : 'UI.DataField',
-                Value : country,
-                Label : 'country',
+                $Type: 'UI.DataField',
+                Value: country,
+                Label: 'country',
             },
             {
-                $Type : 'UI.DataField',
-                Value : is_active,
-                Label : 'is_active',
+                $Type: 'UI.DataField',
+                Value: is_active,
+                Label: 'is_active',
             },
         ],
     },
-    UI.FieldGroup #ChangeData : {
-        $Type : 'UI.FieldGroupType',
+    UI.FieldGroup #ChangeData: {
+        $Type: 'UI.FieldGroupType',
         Data : [
             {
-                $Type : 'UI.DataField',
-                Value : createdAt,
+                $Type: 'UI.DataField',
+                Value: createdAt,
             },
             {
-                $Type : 'UI.DataField',
-                Value : createdBy,
+                $Type: 'UI.DataField',
+                Value: createdBy,
             },
             {
-                $Type : 'UI.DataField',
-                Value : modifiedAt,
+                $Type: 'UI.DataField',
+                Value: modifiedAt,
             },
             {
-                $Type : 'UI.DataField',
-                Value : modifiedBy,
+                $Type: 'UI.DataField',
+                Value: modifiedBy,
             },
         ],
     },
+    UI.CreateHidden          : {$edmJson: {$Not: {$Or: [
+        {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
+        {$Or: [
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
+        ]}
+    ]}}},
+    UI.UpdateHidden          : {$edmJson: {$Not: {$Or: [
+        {$And: [
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
+            {$Eq: [
+                {$Path: 'createdBy'},
+                {$Path: '/CatalogService.EntityContainer/Configuration/username'}
+            ]}
+        ]},
+        {$Or: [
+            {$And: [
+                {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
+                {$Eq: [
+                    {$Path: 'country'},
+                    {$Path: '/CatalogService.EntityContainer/Configuration/country'}
+                ]}
+            ]},
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
+        ]}
+    ]}}},
+    UI.DeleteHidden          : {$edmJson: {$Not: {$Or: [
+        {$And: [
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
+            {$Eq: [
+                {$Path: 'createdBy'},
+                {$Path: '/CatalogService.EntityContainer/Configuration/username'}
+            ]}
+        ]},
+        {$Or: [
+            {$And: [
+                {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
+                {$Eq: [
+                    {$Path: 'country'},
+                    {$Path: '/CatalogService.EntityContainer/Configuration/country'}
+                ]}
+            ]},
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
+        ]}
+    ]}}},
 );
-

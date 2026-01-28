@@ -23,4 +23,5 @@ service CatalogService{
         action setDisable() returns Authors;
     };
 
+    entity Configuration as projection on model.Configuration;
 }

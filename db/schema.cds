@@ -16,3 +16,16 @@ entity Authors : cuid, managed {
   is_active : Boolean default true;
   books  : Association to many Books on books.author = $self;
 }
+
+@odata.singleton @cds.persistence.skip
+entity Configuration {
+    key username: String;
+    country : String(3);
+    writeBooksOwn : Boolean;
+    writeBooksCountry : Boolean;
+    writeBooksAll : Boolean;
+    writeAuthorsOwn : Boolean; 
+    writeAuthorsCountry : Boolean;
+    writeAuthorsAll : Boolean;
+    enableAuthors : Boolean;
+}
