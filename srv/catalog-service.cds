@@ -5,18 +5,18 @@ service CatalogService{
     @odata.draft.enabled
     @(restrict: [
         { grant: 'READ', to : 'ReadBooks'},
-        { grant: 'WRITE', to : 'WriteBooksOwn', where: (createdBy = $user)},
-        { grant: 'WRITE', to : 'WriteBooksCountry', where: (country = $user.Country)},
-        { grant: 'WRITE', to : 'WriteBooksAll'},
+        { grant: '*', to : 'WriteBooksOwn', where: (createdBy = $user)},
+        { grant: '*', to : 'WriteBooksCountry', where: (country = $user.Country)},
+        { grant: '*', to : 'WriteBooksAll'},
     ])
     entity Books as projection on model.Books;
     
     @odata.draft.enabled
     @(restrict: [
         { grant: 'READ', to : 'ReadAuthors'},
-        { grant: 'WRITE', to : 'WriteAuthorsOwn', where: (createdBy = $user)},
-        { grant: 'WRITE', to : 'WriteAuthorsCountry', where: (country = $user.Country)},
-        { grant: 'WRITE', to : 'WriteAuthorsAll'}
+        { grant: '*', to : 'WriteAuthorsOwn', where: (createdBy = $user)},
+        { grant: '*', to : 'WriteAuthorsCountry', where: (country = $user.Country)},
+        { grant: '*', to : 'WriteAuthorsAll'}
     ])
     entity Authors as projection on model.Authors actions {
         action setEnable() returns Authors;
