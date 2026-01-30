@@ -107,50 +107,50 @@ annotate service.Authors with @(
             },
         ],
     },
-    // UI.CreateHidden          : {$edmJson: {$Not: {$Or: [
-    //     {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
-    //     {$Or: [
-    //         {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
-    //         {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
-    //     ]}
-    // ]}}},
-    // UI.UpdateHidden          : {$edmJson: {$Not: {$Or: [
-    //     {$And: [
-    //         {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
-    //         {$Eq: [
-    //             {$Path: 'createdBy'},
-    //             {$Path: '/CatalogService.EntityContainer/Configuration/username'}
-    //         ]}
-    //     ]},
-    //     {$Or: [
-    //         {$And: [
-    //             {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
-    //             {$Eq: [
-    //                 {$Path: 'country'},
-    //                 {$Path: '/CatalogService.EntityContainer/Configuration/country'}
-    //             ]}
-    //         ]},
-    //         {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
-    //     ]}
-    // ]}}},
-    // UI.DeleteHidden          : {$edmJson: {$Not: {$Or: [
-    //     {$And: [
-    //         {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
-    //         {$Eq: [
-    //             {$Path: 'createdBy'},
-    //             {$Path: '/CatalogService.EntityContainer/Configuration/username'}
-    //         ]}
-    //     ]},
-    //     {$Or: [
-    //         {$And: [
-    //             {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
-    //             {$Eq: [
-    //                 {$Path: 'country'},
-    //                 {$Path: '/CatalogService.EntityContainer/Configuration/country'}
-    //             ]}
-    //         ]},
-    //         {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
-    //     ]}
-    // ]}}},
-    // Capabilities.DeleteRestrictions.Deletable : is_deletable
+    UI.CreateHidden          : {$edmJson: {$Not: {$Or: [
+        {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
+        {$Or: [
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
+        ]}
+    ]}}},
+    UI.UpdateHidden          : {$edmJson: {$Not: {$Or: [
+        {$And: [
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
+            {$Eq: [
+                {$Path: 'createdBy'},
+                {$Path: '/CatalogService.EntityContainer/Configuration/username'}
+            ]}
+        ]},
+        {$Or: [
+            {$And: [
+                {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
+                {$Eq: [
+                    {$Path: 'country'},
+                    {$Path: '/CatalogService.EntityContainer/Configuration/country'}
+                ]}
+            ]},
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
+        ]}
+    ]}}},
+    UI.DeleteHidden          : {$edmJson: {$Not: {$Or: [
+        {$And: [
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
+            {$Eq: [
+                {$Path: 'createdBy'},
+                {$Path: '/CatalogService.EntityContainer/Configuration/username'}
+            ]}
+        ]},
+        {$Or: [
+            {$And: [
+                {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
+                {$Eq: [
+                    {$Path: 'country'},
+                    {$Path: '/CatalogService.EntityContainer/Configuration/country'}
+                ]}
+            ]},
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
+        ]}
+    ]}}},
+    Capabilities.DeleteRestrictions.Deletable : is_deletable
 );

@@ -19,8 +19,8 @@ entity Authors : cuid, managed {
   is_active : Boolean default true;
   books  : Association to many Books on books.author = $self;
 
-  // @Core.Computed: false
-  // virtual is_deletable: Boolean;
+  @Core.Computed: false
+  virtual is_deletable: Boolean;
 }
 
 @odata.singleton @cds.persistence.skip

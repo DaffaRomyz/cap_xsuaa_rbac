@@ -71,18 +71,18 @@ public class CatalogServiceAuthorsHandler implements EventHandler {
 
     @After(event = CqnService.EVENT_READ, entity = Authors_.CDS_NAME)
     public void afterReadAuthors(CdsReadEventContext context) {
+        
         UserInfo userInfo = context.getUserInfo();
 
-        CqnSelect select = context.getCqn();
-        List<Authors> authorsList = db.run(select).listOf(Authors.class);
+        List<Authors> authorsList = context.getResult().listOf(Authors.class);
 
         for (Authors authors : authorsList) {
             if ( (userInfo.hasRole("WriteAuthorsOwn") && userInfo.getName().equals(authors.getCreatedBy())) ||
                  (userInfo.hasRole("WriteAuthorsCountry") && !userInfo.getAttributeValues("Country").isEmpty() && userInfo.getAttributeValues("Country").get(0).equals(authors.getCountry()) ) ||
                  userInfo.hasRole("WriteAuthorsAll")) {
-                // authors.setIsDeletable(true);
+                authors.setIsDeletable(true);
             } else {
-                // authors.setIsDeletable(false);
+                authors.setIsDeletable(false);
             }
         }
 
