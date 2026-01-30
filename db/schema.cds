@@ -8,6 +8,9 @@ entity Books : cuid, managed {
   country : String(3);
   stock  : Integer;
   price  : Decimal(9,2);
+
+  @Core.Computed: false
+  virtual is_deletable: Boolean;
 }
 
 entity Authors : cuid, managed {
@@ -15,6 +18,9 @@ entity Authors : cuid, managed {
   country    : String(3);
   is_active : Boolean default true;
   books  : Association to many Books on books.author = $self;
+
+  // @Core.Computed: false
+  // virtual is_deletable: Boolean;
 }
 
 @odata.singleton @cds.persistence.skip

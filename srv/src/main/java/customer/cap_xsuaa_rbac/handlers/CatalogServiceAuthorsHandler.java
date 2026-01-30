@@ -1,11 +1,11 @@
 package customer.cap_xsuaa_rbac.handlers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sap.cds.ResultBuilder;
 import com.sap.cds.ql.Update;
 import com.sap.cds.ql.cqn.CqnSelect;
 import com.sap.cds.ql.cqn.CqnUpdate;
@@ -14,6 +14,7 @@ import com.sap.cds.services.ServiceException;
 import com.sap.cds.services.cds.CdsReadEventContext;
 import com.sap.cds.services.cds.CqnService;
 import com.sap.cds.services.handler.EventHandler;
+import com.sap.cds.services.handler.annotations.After;
 import com.sap.cds.services.handler.annotations.On;
 import com.sap.cds.services.handler.annotations.ServiceName;
 import com.sap.cds.services.persistence.PersistenceService;
@@ -24,8 +25,6 @@ import cds.gen.catalogservice.AuthorsSetDisableContext;
 import cds.gen.catalogservice.AuthorsSetEnableContext;
 import cds.gen.catalogservice.Authors_;
 import cds.gen.catalogservice.CatalogService_;
-import cds.gen.catalogservice.Configuration;
-import cds.gen.catalogservice.Configuration_;
 
 @Component
 @ServiceName(CatalogService_.CDS_NAME)
@@ -70,29 +69,27 @@ public class CatalogServiceAuthorsHandler implements EventHandler {
         context.setCompleted();
     }
 
-    @On(event = CqnService.EVENT_READ, entity = Configuration_.CDS_NAME)
-    public void onReadConfiguration(CdsReadEventContext context) {
-        List<Configuration> configurationList = new ArrayList<>();;
-        Configuration configuration = Configuration.create();
-
+    @After(event = CqnService.EVENT_READ, entity = Authors_.CDS_NAME)
+    public void afterReadAuthors(CdsReadEventContext context) {
         UserInfo userInfo = context.getUserInfo();
 
-        configuration.setUsername(userInfo.getName());
+        CqnSelect select = context.getCqn();
+        List<Authors> authorsList = db.run(select).listOf(Authors.class);
 
-        if (!userInfo.getAttributeValues("Country").isEmpty()) {
-            configuration.setCountry(userInfo.getAttributeValues("Country").get(0));
-            
+        for (Authors authors : authorsList) {
+            if ( (userInfo.hasRole("WriteAuthorsOwn") && userInfo.getName().equals(authors.getCreatedBy())) ||
+                 (userInfo.hasRole("WriteAuthorsCountry") && !userInfo.getAttributeValues("Country").isEmpty() && userInfo.getAttributeValues("Country").get(0).equals(authors.getCountry()) ) ||
+                 userInfo.hasRole("WriteAuthorsAll")) {
+                // authors.setIsDeletable(true);
+            } else {
+                // authors.setIsDeletable(false);
+            }
         }
-        configuration.setWriteBooksOwn(userInfo.hasRole("WriteBooksOwn"));
-        configuration.setWriteBooksCountry(userInfo.hasRole("WriteBooksCountry"));
-        configuration.setWriteBooksAll(userInfo.hasRole("WriteBooksAll"));
-        configuration.setWriteAuthorsOwn(userInfo.hasRole("WriteAuthorsOwn"));
-        configuration.setWriteAuthorsCountry(userInfo.hasRole("WriteAuthorsCountry"));
-        configuration.setWriteAuthorsAll(userInfo.hasRole("WriteAuthorsAll"));
-        configuration.setEnableAuthors(userInfo.hasRole("EnableAuthors"));
 
-        configurationList.add(configuration);
-
-        context.setResult(configurationList);
+        ResultBuilder resultBuilder = ResultBuilder.selectedRows(authorsList);
+        if (context.getCqn().hasInlineCount()) {
+            resultBuilder.inlineCount(authorsList.size());
+        }
+        context.setResult(resultBuilder.result());
     }
 }

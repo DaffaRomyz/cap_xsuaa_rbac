@@ -109,15 +109,15 @@ annotate service.Books with @(
         ],
     },
     UI.CreateHidden          : {$edmJson: {$Not: {$Or: [
-        {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
+        {$Path: '/CatalogService.EntityContainer/Configuration/writeBooksOwn'},
         {$Or: [
-            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
-            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeBooksCountry'},
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeBooksAll'}
         ]}
     ]}}},
     UI.UpdateHidden          : {$edmJson: {$Not: {$Or: [
         {$And: [
-            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeBooksOwn'},
             {$Eq: [
                 {$Path: 'createdBy'},
                 {$Path: '/CatalogService.EntityContainer/Configuration/username'}
@@ -125,18 +125,18 @@ annotate service.Books with @(
         ]},
         {$Or: [
             {$And: [
-                {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
+                {$Path: '/CatalogService.EntityContainer/Configuration/writeBooksCountry'},
                 {$Eq: [
                     {$Path: 'country'},
                     {$Path: '/CatalogService.EntityContainer/Configuration/country'}
                 ]}
             ]},
-            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeBooksAll'}
         ]}
     ]}}},
     UI.DeleteHidden          : {$edmJson: {$Not: {$Or: [
         {$And: [
-            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsOwn'},
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeBooksOwn'},
             {$Eq: [
                 {$Path: 'createdBy'},
                 {$Path: '/CatalogService.EntityContainer/Configuration/username'}
@@ -144,15 +144,16 @@ annotate service.Books with @(
         ]},
         {$Or: [
             {$And: [
-                {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsCountry'},
+                {$Path: '/CatalogService.EntityContainer/Configuration/writeBooksCountry'},
                 {$Eq: [
                     {$Path: 'country'},
                     {$Path: '/CatalogService.EntityContainer/Configuration/country'}
                 ]}
             ]},
-            {$Path: '/CatalogService.EntityContainer/Configuration/writeAuthorsAll'}
+            {$Path: '/CatalogService.EntityContainer/Configuration/writeBooksAll'}
         ]}
     ]}}},
+    Capabilities.DeleteRestrictions.Deletable : is_deletable
 );
 
 annotate service.Books with {
